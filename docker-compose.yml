@@ -39,6 +39,7 @@ services:
       dockerfile: dev.Dockerfile
     volumes:
       - "./api/src:/usr/src/app/src"
+      - "./frontend/src/graphql/generated:/usr/src/app/generated"
     environment:
       - MONGO_URI=mongodb://root:hqXzNv2f5YC45veW@mongo:27017/ett?authSource=admin
     restart: unless-stopped
