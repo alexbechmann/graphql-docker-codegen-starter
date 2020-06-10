@@ -1,9 +1,0 @@
-schema: http://api:4000/api/graphql
-documents: "frontend/src/**/*.graphql"
-generates:
-  frontend/src/models.ts:
-    - typescript
-    - typescript-operations
-  api/src/models.ts:
-    - typescript
-    - typescript-resolvers
