@@ -39,15 +39,31 @@ services:
       dockerfile: dev.Dockerfile
     volumes:
       - "./api/src:/usr/src/app/src"
-    # - "~/.npmrc:/usr/src/app"
     environment:
       - MONGO_URI=mongodb://root:hqXzNv2f5YC45veW@mongo:27017/ett?authSource=admin
     restart: unless-stopped
-    ports:
-      - "4000:4000"
     links:
       - mongo
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - "./frontend/src:/usr/src/app/src"
+      - "./frontend/index.html:/usr/src/app/index.html"
+      - "./frontend/vite.config.js:/usr/src/app/vite.config.js"
+    restart: unless-stopped
+
+  forms-service:
+    image: nginx
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+    links:
+      - api
+      - frontend
+    ports:
+      - "8080:80"
+
 volumes:
   mongovolume:
-  # blobstoragedata:
