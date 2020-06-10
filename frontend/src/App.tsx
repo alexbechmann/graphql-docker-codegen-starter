@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
+import { useHelloQuery } from "./graphql/generated";
 
 function App() {
   const [count, setCount] = useState(0);
 
+  const { data } = useHelloQuery();
   return (
     <div className="App">
       <header className="App-header">
-        <p>Hello Vite + React!</p>
+        <p>Hello Vite + React! - {data?.hello}</p>
         <p>
           <button onClick={() => setCount((count) => count + 1)}>
             count is: {count}

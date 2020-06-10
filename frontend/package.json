@@ -6,10 +6,15 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@apollo/client": "^3.0.0-rc.2",
     "@pika/react": "^16.13.1",
-    "@pika/react-dom": "^16.13.1"
+    "@pika/react-dom": "^16.13.1",
+    "graphql": "^15.1.0",
+    "graphql-tag": "^2.10.3"
   },
   "devDependencies": {
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
     "typescript": "^3.9.5",
     "vite": "^0.20.0",
     "vite-plugin-react": "^2.0.0"

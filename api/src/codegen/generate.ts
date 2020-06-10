@@ -1,5 +1,8 @@
 import { generate } from "@graphql-codegen/cli";
 import { GraphQLSchema, printSchema } from "graphql";
+import queries from "./queries";
+
+console.log({ queries });
 
 export async function generateCode(schema: GraphQLSchema) {
   // Introspect
@@ -13,24 +16,31 @@ export async function generateCode(schema: GraphQLSchema) {
       },
     },
     true
-  );
+  ).catch(console.log);
 
   // Typescript
   await generate(
     {
       schema: printSchema(schema),
-      documents: "**/queries.graphql",
-
+      documents: "**/queries/index.ts",
       generates: {
-        [process.cwd() + "/generated/types.d.ts"]: {
+        [process.cwd() + "/generated/index.tsx"]: {
           plugins: [
             "typescript",
             "typescript-operations",
-            // "typescript-react-apollo",
+            {
+              "typescript-react-apollo": {
+                withHooks: true,
+                withHOC: false,
+                withComponent: false,
+                apolloReactHooksImportFrom: "@apollo/client",
+                apolloReactCommonImportFrom: "@apollo/client",
+              },
+            },
           ],
         },
       },
     },
     true
-  );
+  ).catch(console.log);
 }
